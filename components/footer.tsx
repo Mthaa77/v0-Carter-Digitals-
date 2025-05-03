@@ -5,6 +5,7 @@ import type React from "react"
 import Link from "next/link"
 import { Facebook, Instagram, Twitter, Linkedin, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -27,17 +28,22 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-background py-12 border-t">
-      <div className="container mx-auto px-4">
+    <footer className="bg-background py-12 border-t border-white/5 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 futuristic-grid opacity-30 pointer-events-none"></div>
+      <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-primary/5 blur-[100px]"></div>
+      <div className="absolute bottom-1/3 left-1/3 w-48 h-48 rounded-full bg-blue-500/5 blur-[80px]"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div>
+          <div className="reveal-on-scroll">
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Website Design & Development
                 </a>
@@ -46,7 +52,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   E-commerce Solutions
                 </a>
@@ -55,7 +61,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Logo & Brand Identity
                 </a>
@@ -64,7 +70,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Flyers & Digital Media
                 </a>
@@ -73,7 +79,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Professional Presentations
                 </a>
@@ -82,7 +88,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   CV/Resume Design
                 </a>
@@ -91,7 +97,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Copywriting & SEO
                 </a>
@@ -99,7 +105,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="reveal-on-scroll">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -109,7 +115,7 @@ export default function Footer() {
                     e.preventDefault()
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Home
                 </a>
@@ -118,7 +124,7 @@ export default function Footer() {
                 <a
                   href="#services"
                   onClick={(e) => scrollToSection(e, "services")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Services
                 </a>
@@ -127,7 +133,7 @@ export default function Footer() {
                 <a
                   href="#pricing"
                   onClick={(e) => scrollToSection(e, "pricing")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Pricing
                 </a>
@@ -136,7 +142,7 @@ export default function Footer() {
                 <a
                   href="#portfolio"
                   onClick={(e) => scrollToSection(e, "portfolio")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Portfolio
                 </a>
@@ -145,25 +151,25 @@ export default function Footer() {
                 <a
                   href="#contact"
                   onClick={(e) => scrollToSection(e, "contact")}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Contact
                 </a>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors micro-slide">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors micro-slide">
                   Terms of Service
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
+          <div className="reveal-on-scroll">
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
               <li className="text-muted-foreground">
@@ -181,25 +187,25 @@ export default function Footer() {
               <h4 className="text-sm font-semibold mb-3">Follow Us</h4>
               <div className="flex space-x-4">
                 <Link href="https://facebook.com/carterdigitals" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon" className="rounded-full btn-3d">
+                  <Button variant="outline" size="icon" className="rounded-full premium-btn-outline micro-bounce">
                     <Facebook className="h-4 w-4" />
                     <span className="sr-only">Facebook</span>
                   </Button>
                 </Link>
                 <Link href="#" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon" className="rounded-full btn-3d">
+                  <Button variant="outline" size="icon" className="rounded-full premium-btn-outline micro-bounce">
                     <Instagram className="h-4 w-4" />
                     <span className="sr-only">Instagram</span>
                   </Button>
                 </Link>
                 <Link href="#" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon" className="rounded-full btn-3d">
+                  <Button variant="outline" size="icon" className="rounded-full premium-btn-outline micro-bounce">
                     <Twitter className="h-4 w-4" />
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
                 <Link href="#" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon" className="rounded-full btn-3d">
+                  <Button variant="outline" size="icon" className="rounded-full premium-btn-outline micro-bounce">
                     <Linkedin className="h-4 w-4" />
                     <span className="sr-only">LinkedIn</span>
                   </Button>
@@ -209,20 +215,23 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} Carter Digitals. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Crafted by <span className="font-semibold">Kabelo Kadiaka</span> for Carter Digitals — SA born, globally
-            focused.
+            Crafted by <span className="font-semibold text-gradient-primary">Kabelo Kadiaka</span> for Carter Digitals —
+            SA born, globally focused.
           </p>
         </div>
 
         <Button
           variant="outline"
           size="icon"
-          className="fixed bottom-6 right-6 rounded-full shadow-lg z-10 btn-3d"
+          className={cn(
+            "fixed bottom-6 right-6 rounded-full shadow-lg z-10 premium-btn-outline",
+            "backdrop-blur-md bg-background/50 border-white/10",
+          )}
           onClick={scrollToTop}
         >
           <ArrowUp className="h-5 w-5" />

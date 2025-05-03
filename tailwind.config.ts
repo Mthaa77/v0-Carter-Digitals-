@@ -9,6 +9,9 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  future: {
+    hoverOnlyWhenSupported: true, // Better performance on mobile
+  },
   prefix: "",
   theme: {
     container: {
@@ -61,6 +64,7 @@ const config = {
       },
       fontFamily: {
         sans: ["var(--font-poppins)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
       },
       keyframes: {
         "accordion-down": {

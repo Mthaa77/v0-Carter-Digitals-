@@ -14,6 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/components/ui/use-toast"
 import SectionIntro from "./section-intro"
+import { cn } from "@/lib/utils"
 
 export default function Contact() {
   const { toast } = useToast()
@@ -39,9 +40,9 @@ export default function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission with delay
+    // The form will be handled by Netlify
+    // This is just for UI feedback
     setTimeout(() => {
-      console.log(formData)
       setIsSubmitting(false)
 
       toast({
@@ -58,17 +59,26 @@ export default function Contact() {
         message: "",
       })
     }, 1500)
+
+    // Let the native form submission happen for Netlify
+    const form = e.target as HTMLFormElement
+    form.submit()
   }
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-gradient-to-b from-background via-primary/5 to-background">
+    <section
+      id="contact"
+      className="py-20 md:py-32 bg-gradient-to-b from-background via-primary/5 to-background futuristic-grid"
+    >
       <div className="container mx-auto px-4">
-        <SectionIntro
-          badge="GET IN TOUCH"
-          title="Let's Start Your Digital Journey"
-          description="Ready to stop losing customers to outdated digital experiences? Contact us today for a free consultation and quote."
-          colorClass="bg-blue-500/10 text-blue-500"
-        />
+        <div className="reveal-on-scroll">
+          <SectionIntro
+            badge="GET IN TOUCH"
+            title="Let's Start Your Digital Journey"
+            description="Ready to stop losing customers to outdated digital experiences? Contact us today for a free consultation and quote."
+            colorClass="bg-blue-500/10 text-blue-500"
+          />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <motion.div
@@ -76,15 +86,15 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="lg:col-span-1"
+            className="lg:col-span-1 reveal-on-scroll"
           >
-            <Card className="h-full card-3d bg-gradient-to-br from-primary/20 to-primary/5 border-primary/30">
+            <Card className="h-full premium-card bg-gradient-to-br from-primary/20 to-primary/5 border-primary/30">
               <CardHeader>
                 <CardTitle>Contact Kabelo Kadiaka</CardTitle>
                 <CardDescription>Developer & Digital Expert</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 premium-card p-3 micro-bounce">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                     <Phone className="h-5 w-5" />
                   </div>
@@ -96,7 +106,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 premium-card p-3 micro-bounce">
                   <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
                     <Mail className="h-5 w-5" />
                   </div>
@@ -108,7 +118,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 premium-card p-3 micro-bounce">
                   <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
                     <Facebook className="h-5 w-5" />
                   </div>
@@ -142,7 +152,11 @@ export default function Contact() {
                   <Button
                     asChild
                     variant="outline"
-                    className="w-full btn-3d bg-gradient-to-r from-green-500/20 to-green-500/5 border-green-500/30 hover:text-green-500"
+                    className={cn(
+                      "w-full premium-btn-outline",
+                      "bg-gradient-to-r from-green-500/20 to-green-500/5",
+                      "border-green-500/30 hover:text-green-500",
+                    )}
                   >
                     <a
                       href="https://wa.me/27724026893"
@@ -163,9 +177,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="lg:col-span-2"
+            className="lg:col-span-2 reveal-on-scroll"
           >
-            <Card className="card-3d bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
+            <Card className="premium-card bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20">
               <CardHeader>
                 <CardTitle>Send Us a Message</CardTitle>
                 <CardDescription>
@@ -173,7 +187,9 @@ export default function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-6">
+                  {/* Hidden input required for Netlify forms */}
+                  <input type="hidden" name="form-name" value="contact" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="floating-label">
                       <Input
@@ -183,7 +199,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="input-3d"
+                        className="premium-input"
                       />
                       <Label htmlFor="name">Your Name</Label>
                     </div>
@@ -196,7 +212,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="input-3d"
+                        className="premium-input"
                       />
                       <Label htmlFor="email">Your Email</Label>
                     </div>
@@ -207,11 +223,12 @@ export default function Contact() {
                     <Select
                       onValueChange={(value) => handleSelectChange("projectType", value)}
                       value={formData.projectType}
+                      name="projectType"
                     >
-                      <SelectTrigger id="projectType" className="input-3d">
+                      <SelectTrigger id="projectType" className="premium-input">
                         <SelectValue placeholder="Select project type" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="glassmorphism">
                         <SelectItem value="website">Website</SelectItem>
                         <SelectItem value="ecommerce">E-commerce</SelectItem>
                         <SelectItem value="branding">Logo & Branding</SelectItem>
@@ -230,20 +247,21 @@ export default function Contact() {
                       onValueChange={(value) => handleSelectChange("budget", value)}
                       value={formData.budget}
                       className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                      name="budget"
                     >
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 premium-card p-2 micro-bounce">
                         <RadioGroupItem value="under-5k" id="under-5k" />
                         <Label htmlFor="under-5k">Under R5,000</Label>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 premium-card p-2 micro-bounce">
                         <RadioGroupItem value="5k-10k" id="5k-10k" />
                         <Label htmlFor="5k-10k">R5,000 - R10,000</Label>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 premium-card p-2 micro-bounce">
                         <RadioGroupItem value="10k-20k" id="10k-20k" />
                         <Label htmlFor="10k-20k">R10,000 - R20,000</Label>
                       </div>
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 premium-card p-2 micro-bounce">
                         <RadioGroupItem value="over-20k" id="over-20k" />
                         <Label htmlFor="over-20k">Over R20,000</Label>
                       </div>
@@ -259,7 +277,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      className="input-3d pt-6"
+                      className="premium-input pt-6"
                     />
                     <Label htmlFor="message">Tell us about your project</Label>
                   </div>
@@ -267,7 +285,12 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full btn-3d bg-gradient-to-r from-primary to-orange-400 hover:from-orange-400 hover:to-primary"
+                    className={cn(
+                      "w-full btn-3d",
+                      "bg-gradient-to-r from-primary via-orange-400 to-rose-500",
+                      "hover:from-rose-500 hover:via-orange-400 hover:to-primary",
+                      "border-0 shadow-lg shadow-primary/20",
+                    )}
                   >
                     {isSubmitting ? (
                       <>

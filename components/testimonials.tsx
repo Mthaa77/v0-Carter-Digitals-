@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import SectionIntro from "./section-intro"
+import { cn } from "@/lib/utils"
 
 interface Testimonial {
   id: number
@@ -101,21 +102,23 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-background via-primary/5 to-background overflow-hidden">
+    <section className="py-20 md:py-32 bg-gradient-to-b from-background via-primary/5 to-background overflow-hidden futuristic-grid">
       <div className="container mx-auto px-4">
-        <SectionIntro
-          badge="CLIENT SUCCESS STORIES"
-          title="Real Results for Real Businesses"
-          description="Don't just take our word for it. Here's what our clients have achieved after working with us."
-          colorClass="bg-orange-500/10 text-orange-500"
-        />
+        <div className="reveal-on-scroll">
+          <SectionIntro
+            badge="CLIENT SUCCESS STORIES"
+            title="Real Results for Real Businesses"
+            description="Don't just take our word for it. Here's what our clients have achieved after working with us."
+            colorClass="bg-orange-500/10 text-orange-500"
+          />
+        </div>
 
         <div className="relative max-w-6xl mx-auto mt-12">
           {/* Background decorative elements */}
           <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
           <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl pointer-events-none"></div>
 
-          <div className="relative">
+          <div className="relative reveal-on-scroll">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -128,14 +131,14 @@ export default function Testimonials() {
                 onMouseLeave={() => setIsHovering(false)}
               >
                 <div className="relative">
-                  <div className="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-primary/20"></div>
-                  <div className="absolute -bottom-6 -right-6 w-12 h-12 rounded-full bg-blue-500/20"></div>
+                  <div className="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-primary/20 blur-lg"></div>
+                  <div className="absolute -bottom-6 -right-6 w-12 h-12 rounded-full bg-blue-500/20 blur-lg"></div>
 
-                  <Card className={`bg-gradient-to-br ${testimonials[activeIndex].colorClass} p-1 card-3d`}>
-                    <CardContent className="bg-background/95 backdrop-blur p-8 rounded-lg">
+                  <Card className={cn("premium-card p-1", "bg-gradient-to-br", testimonials[activeIndex].colorClass)}>
+                    <CardContent className="glassmorphism p-8 rounded-lg">
                       <div className="mb-6 flex justify-between items-start">
                         <div className="flex items-center gap-4">
-                          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white dark:border-gray-800">
+                          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 shadow-lg">
                             <Image
                               src={testimonials[activeIndex].image || "/placeholder.svg"}
                               alt={testimonials[activeIndex].name}
@@ -158,16 +161,19 @@ export default function Testimonials() {
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`h-5 w-5 ${
+                            className={cn(
+                              "h-5 w-5",
                               i < testimonials[activeIndex].rating
                                 ? "text-yellow-500 fill-yellow-500"
-                                : "text-muted-foreground"
-                            }`}
+                                : "text-muted-foreground",
+                            )}
                           />
                         ))}
                       </div>
 
-                      <blockquote className="text-lg italic mb-6">"{testimonials[activeIndex].quote}"</blockquote>
+                      <blockquote className="text-lg italic mb-6 leading-relaxed">
+                        "{testimonials[activeIndex].quote}"
+                      </blockquote>
                     </CardContent>
                   </Card>
                 </div>
@@ -183,11 +189,12 @@ export default function Testimonials() {
                     {testimonials.map((_, index) => (
                       <button
                         key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        className={cn(
+                          "w-3 h-3 rounded-full transition-all duration-300",
                           index === activeIndex
                             ? "bg-primary w-8"
-                            : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                        }`}
+                            : "bg-muted-foreground/30 hover:bg-muted-foreground/50",
+                        )}
                         onClick={() => handleManualNavigation(() => setActiveIndex(index))}
                         aria-label={`Go to testimonial ${index + 1}`}
                       />
@@ -198,7 +205,7 @@ export default function Testimonials() {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-full btn-3d"
+                      className="rounded-full premium-btn-outline micro-bounce"
                       onClick={() => handleManualNavigation(prevTestimonial)}
                     >
                       <ChevronLeft className="h-5 w-5" />
@@ -207,7 +214,7 @@ export default function Testimonials() {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-full btn-3d"
+                      className="rounded-full premium-btn-outline micro-bounce"
                       onClick={() => handleManualNavigation(nextTestimonial)}
                     >
                       <ChevronRight className="h-5 w-5" />
@@ -219,21 +226,26 @@ export default function Testimonials() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-20">
+          <div className="mt-20 reveal-on-scroll">
             <h3 className="text-xl font-semibold text-center mb-8">Trusted By</h3>
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16 stagger-children">
               {[1, 2, 3, 4, 5].map((i) => (
-                <div
+                <motion.div
                   key={i}
-                  className="relative w-24 h-24 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative w-24 h-24 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110 reveal-on-scroll"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-blue-500/5 rounded-full blur-lg opacity-50"></div>
                   <Image
                     src={`/placeholder-logo.svg?height=100&width=100`}
                     alt={`Client logo ${i}`}
                     fill
-                    className="object-contain"
+                    className="object-contain relative z-10"
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
