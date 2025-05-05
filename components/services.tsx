@@ -8,6 +8,7 @@ import { Globe, Palette, FileImage, Presentation, FileText, PenTool } from "luci
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import SectionIntro from "./section-intro"
+import { handleSmoothScroll } from "@/lib/smooth-scroll"
 
 interface ServiceCardProps {
   icon: React.ReactNode
@@ -122,18 +123,6 @@ export default function Services() {
     },
   ]
 
-  // Smooth scroll function for CTA button
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100, // Offset for header
-        behavior: "smooth",
-      })
-    }
-  }
-
   return (
     <section id="services" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4">
@@ -169,7 +158,7 @@ export default function Services() {
           <Button
             size="lg"
             className="btn-3d bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500"
-            onClick={(e) => scrollToSection(e as any, "contact")}
+            onClick={(e) => handleSmoothScroll(e as any, "contact")}
           >
             Discuss Your Project
           </Button>

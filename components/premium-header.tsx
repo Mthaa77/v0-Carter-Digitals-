@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -12,6 +10,7 @@ import { Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { motion, AnimatePresence } from "framer-motion"
+import { handleSmoothScroll } from "@/lib/smooth-scroll"
 
 export default function PremiumHeader() {
   const [scrolled, setScrolled] = useState(false)
@@ -30,18 +29,6 @@ export default function PremiumHeader() {
       window.removeEventListener("scroll", handleScroll)
     }
   }, [scrolled])
-
-  // Smooth scroll function for navigation links
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100, // Offset for header
-        behavior: "smooth",
-      })
-    }
-  }
 
   const navItems = [
     { name: "Services", id: "services" },
@@ -94,7 +81,7 @@ export default function PremiumHeader() {
                   className="text-sm font-medium rounded-full px-4 hover:bg-primary/10 hover:text-primary transition-colors"
                   asChild
                 >
-                  <a href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)}>
+                  <a href={`#${item.id}`} onClick={(e) => handleSmoothScroll(e, item.id)}>
                     {item.name}
                   </a>
                 </Button>
@@ -114,7 +101,7 @@ export default function PremiumHeader() {
               "border-0 shadow-md shadow-primary/20",
             )}
           >
-            <a href="#contact" onClick={(e) => scrollToSection(e, "contact")}>
+            <a href="#contact" onClick={(e) => handleSmoothScroll(e, "contact")}>
               Get a Quote
             </a>
           </Button>
@@ -140,7 +127,7 @@ export default function PremiumHeader() {
                     href={`#${item.id}`}
                     onClick={(e) => {
                       document.querySelector("[data-radix-collection-item]")?.click() // Close sheet
-                      scrollToSection(e, item.id)
+                      handleSmoothScroll(e, item.id)
                     }}
                     className="text-lg font-medium hover:text-primary transition-colors"
                   >
@@ -160,7 +147,7 @@ export default function PremiumHeader() {
                     href="#contact"
                     onClick={(e) => {
                       document.querySelector("[data-radix-collection-item]")?.click() // Close sheet
-                      scrollToSection(e, "contact")
+                      handleSmoothScroll(e, "contact")
                     }}
                   >
                     Get a Quote

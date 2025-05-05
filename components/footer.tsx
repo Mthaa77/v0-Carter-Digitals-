@@ -1,11 +1,10 @@
 "use client"
 
-import type React from "react"
-
 import Link from "next/link"
 import { Facebook, Instagram, Twitter, Linkedin, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { handleSmoothScroll } from "@/lib/smooth-scroll"
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -13,18 +12,6 @@ export default function Footer() {
       top: 0,
       behavior: "smooth",
     })
-  }
-
-  // Smooth scroll function for navigation links
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100, // Offset for header
-        behavior: "smooth",
-      })
-    }
   }
 
   return (
@@ -42,7 +29,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Website Design & Development
@@ -51,7 +38,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   E-commerce Solutions
@@ -60,7 +47,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Logo & Brand Identity
@@ -69,7 +56,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Flyers & Digital Media
@@ -78,7 +65,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Professional Presentations
@@ -87,7 +74,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   CV/Resume Design
@@ -96,7 +83,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Copywriting & SEO
@@ -113,7 +100,7 @@ export default function Footer() {
                   href="#"
                   onClick={(e) => {
                     e.preventDefault()
-                    window.scrollTo({ top: 0, behavior: "smooth" })
+                    scrollToTop()
                   }}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
@@ -123,7 +110,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#services"
-                  onClick={(e) => scrollToSection(e, "services")}
+                  onClick={(e) => handleSmoothScroll(e, "services")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Services
@@ -132,7 +119,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#pricing"
-                  onClick={(e) => scrollToSection(e, "pricing")}
+                  onClick={(e) => handleSmoothScroll(e, "pricing")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Pricing
@@ -141,7 +128,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#portfolio"
-                  onClick={(e) => scrollToSection(e, "portfolio")}
+                  onClick={(e) => handleSmoothScroll(e, "portfolio")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Portfolio
@@ -150,7 +137,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#contact"
-                  onClick={(e) => scrollToSection(e, "contact")}
+                  onClick={(e) => handleSmoothScroll(e, "contact")}
                   className="text-muted-foreground hover:text-primary transition-colors micro-slide"
                 >
                   Contact

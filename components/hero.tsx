@@ -1,13 +1,12 @@
 "use client"
 
-import type React from "react"
-
 import { useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { handleSmoothScroll } from "@/lib/smooth-scroll"
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,18 +17,7 @@ export default function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-  // Smooth scroll function for CTA buttons
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    const element = document.getElementById(id)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100, // Offset for header
-        behavior: "smooth",
-      })
-    }
-  }
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
 
   // Parallax effect for decorative elements
   useEffect(() => {
@@ -104,7 +92,10 @@ export default function Hero() {
         data-strength="35"
       ></div>
 
-      <motion.div style={{ y, opacity }} className="container relative z-10 mx-auto px-4 flex flex-col items-center">
+      <motion.div
+        style={{ y, opacity, scale }}
+        className="container relative z-10 mx-auto px-4 flex flex-col items-center"
+      >
         <div className="flex flex-col items-center justify-between gap-8 md:gap-16 max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -158,7 +149,7 @@ export default function Hero() {
                   "hover:from-rose-500 hover:via-orange-400 hover:to-primary",
                   "border-0 shadow-lg shadow-primary/20 h-14 px-8",
                 )}
-                onClick={(e) => scrollToSection(e as any, "services")}
+                onClick={(e) => handleSmoothScroll(e as any, "services")}
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Explore Our Services <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -168,7 +159,7 @@ export default function Hero() {
                 variant="outline"
                 size="lg"
                 className="text-base btn-3d border-2 border-white/10 backdrop-blur-sm bg-white/5 hover:bg-white/10 hover:border-white/20 h-14 px-8"
-                onClick={(e) => scrollToSection(e as any, "contact")}
+                onClick={(e) => handleSmoothScroll(e as any, "contact")}
               >
                 Get a Free Consultation
               </Button>

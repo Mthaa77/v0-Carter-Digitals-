@@ -36,15 +36,29 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // The form will be handled by Netlify
-    // This is just for UI feedback
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // Create FormData object from the form
+      const formElement = e.currentTarget
+      const formDataObj = new FormData(formElement)
 
+      // Send the form data to Netlify
+      const response = await fetch("/__forms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataObj as any).toString(),
+      })
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+      }
+
+      // Show success message
       toast({
         title: "Message sent!",
         description: "We'll get back to you as soon as possible.",
@@ -58,11 +72,16 @@ export default function Contact() {
         budget: "",
         message: "",
       })
-    }, 1500)
-
-    // Let the native form submission happen for Netlify
-    const form = e.target as HTMLFormElement
-    form.submit()
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -187,7 +206,7 @@ export default function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-6">
+                <form name="contact" onSubmit={handleSubmit} className="space-y-6">
                   {/* Hidden input required for Netlify forms */}
                   <input type="hidden" name="form-name" value="contact" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

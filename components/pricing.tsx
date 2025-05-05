@@ -81,6 +81,21 @@ const websitePlans: PricingPlan[] = [
     cms: true,
     colorClass: "from-purple-500/20 to-purple-500/5 border-purple-500/30",
   },
+  {
+    title: "AI Call Agents",
+    price: "R3,999",
+    description: "Intelligent virtual agents that handle calls for your business",
+    features: [
+      "24/7 call answering",
+      "Natural voice AI technology",
+      "Appointment scheduling",
+      "Call routing capabilities",
+      "Custom voice & script setup",
+      "Installation & training included",
+    ],
+    cta: "Get Started",
+    colorClass: "from-indigo-500/20 to-indigo-500/5 border-indigo-500/30",
+  },
 ]
 
 const ecommercePlans: PricingPlan[] = [

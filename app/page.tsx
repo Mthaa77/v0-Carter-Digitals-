@@ -1,10 +1,10 @@
 import PremiumHeader from "@/components/premium-header"
 import PremiumHero from "@/components/premium-hero"
-import WelcomeSection from "@/components/welcome-section"
+import PremiumWelcome from "@/components/premium-welcome"
 import InteractiveServices from "@/components/interactive-services"
-import Testimonials from "@/components/testimonials"
+import PremiumTestimonials from "@/components/premium-testimonials"
 import WhyUs from "@/components/why-us"
-import Contact from "@/components/contact"
+import EnhancedContact from "@/components/enhanced-contact"
 import Footer from "@/components/footer"
 import ScrollAnimations from "@/components/scroll-animations"
 import DynamicSections from "@/components/dynamic-sections"
@@ -15,12 +15,12 @@ export default function Home() {
       <ScrollAnimations />
       <PremiumHeader />
       <PremiumHero />
-      <WelcomeSection />
+      <PremiumWelcome />
       <InteractiveServices />
       <DynamicSections />
-      <Testimonials />
+      <PremiumTestimonials />
       <WhyUs />
-      <Contact />
+      <EnhancedContact />
       <Footer />
     </main>
   )

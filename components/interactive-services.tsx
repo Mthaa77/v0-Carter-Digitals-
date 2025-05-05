@@ -17,6 +17,10 @@ import {
   Search,
   ArrowRight,
   Check,
+  Phone,
+  MessageSquare,
+  ArrowRightCircle,
+  Clock,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -247,6 +251,51 @@ const services: Service[] = [
         features: ["Blog calendar", "SEO articles", "Email newsletters", "Social media content"],
         image: "/placeholder.svg?height=300&width=400",
         color: "border-cyan-500/30 bg-cyan-500/5",
+      },
+    ],
+  },
+  {
+    id: "ai-call-agents",
+    title: "AI Call Agents",
+    description: "Intelligent virtual agents that handle calls for your business",
+    icon: <Phone className="h-6 w-6" />,
+    color: "from-indigo-500 to-violet-500",
+    features: [
+      {
+        title: "24/7 Availability",
+        description: "Never miss a customer call again",
+        icon: <Clock className="h-5 w-5" />,
+      },
+      {
+        title: "Natural Conversations",
+        description: "AI that sounds human and understands context",
+        icon: <MessageSquare className="h-5 w-5" />,
+      },
+      {
+        title: "Call Routing",
+        description: "Intelligent routing to the right department",
+        icon: <ArrowRightCircle className="h-5 w-5" />,
+      },
+    ],
+    examples: [
+      {
+        title: "Virtual Receptionist",
+        description: "Professional call handling for small businesses",
+        features: ["Answer incoming calls", "Schedule appointments", "Take messages", "Route urgent calls"],
+        image: "/placeholder.svg?height=300&width=400",
+        color: "border-indigo-500/30 bg-indigo-500/5",
+      },
+      {
+        title: "Outbound Caller",
+        description: "Automated follow-ups and appointment reminders",
+        features: [
+          "Appointment reminders",
+          "Payment follow-ups",
+          "Customer satisfaction surveys",
+          "Special promotions",
+        ],
+        image: "/placeholder.svg?height=300&width=400",
+        color: "border-violet-500/30 bg-violet-500/5",
       },
     ],
   },

@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 24 100% 50%;
+    --primary: 262 80% 50%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 190 95% 39%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 130 94% 45%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 24 100% 50%;
-    --radius: 1rem;
+    --ring: 262 80% 50%;
+    --radius: 1.5rem;
   }
 
   .dark {
@@ -33,19 +33,19 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 47.4% 11.2%;
     --popover-foreground: 210 40% 98%;
-    --primary: 24 100% 50%;
+    --primary: 262 70% 60%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 190 85% 39%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 130 84% 45%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 24 100% 50%;
+    --ring: 262 70% 60%;
   }
 }
 
@@ -87,8 +87,8 @@
 
 /* Premium Glassmorphism */
 .glassmorphism {
-  @apply backdrop-blur-md border border-white/10 dark:border-white/5;
-  background: rgba(255, 255, 255, 0.05);
+  @apply backdrop-blur-md border border-white/20 dark:border-white/10;
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
@@ -98,7 +98,7 @@
 
 /* Premium Text Gradients */
 .text-gradient-primary {
-  @apply bg-gradient-to-r from-primary via-orange-400 to-rose-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
 }
 
 .text-gradient-blue {
@@ -111,8 +111,8 @@
 
 /* Premium Card Styles */
 .premium-card {
-  @apply relative overflow-hidden rounded-xl backdrop-blur-sm border border-white/10 dark:border-white/5;
-  background: rgba(255, 255, 255, 0.02);
+  @apply relative overflow-hidden rounded-3xl backdrop-blur-sm border border-white/20 dark:border-white/10;
+  background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), inset 0 0 0 1px
     rgba(255, 255, 255, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -135,15 +135,15 @@
 /* Premium Button Styles */
 .premium-btn {
   @apply relative overflow-hidden rounded-full;
-  background: linear-gradient(135deg, rgba(255, 102, 0, 1), rgba(255, 102, 0, 0.8));
-  box-shadow: 0 4px 10px -2px rgba(255, 102, 0, 0.3), 0 2px 6px -1px rgba(0, 0, 0, 0.05), inset 0 0 0 1px
+  background: linear-gradient(135deg, rgba(var(--primary), 1), rgba(var(--primary), 0.8));
+  box-shadow: 0 4px 10px -2px rgba(var(--primary), 0.3), 0 2px 6px -1px rgba(0, 0, 0, 0.05), inset 0 0 0 1px
     rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .premium-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(255, 102, 0, 0.4), 0 4px 10px -2px rgba(0, 0, 0, 0.1), inset 0 0 0 1px
+  box-shadow: 0 10px 20px -5px rgba(var(--primary), 0.4), 0 4px 10px -2px rgba(0, 0, 0, 0.1), inset 0 0 0 1px
     rgba(255, 255, 255, 0.2);
 }
 
@@ -152,27 +152,27 @@
 }
 
 .premium-btn-outline {
-  @apply relative overflow-hidden rounded-full border-2 border-white/10 bg-white/5 backdrop-blur-sm;
+  @apply relative overflow-hidden rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-sm;
   box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .premium-btn-outline:hover {
-  @apply border-white/20 bg-white/10;
+  @apply border-white/30 bg-white/10;
   transform: translateY(-2px);
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Premium Input Styles */
 .premium-input {
-  @apply backdrop-blur-sm bg-white/5 dark:bg-black/5 border border-white/10 dark:border-white/5 rounded-lg;
+  @apply backdrop-blur-sm bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-2xl;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .premium-input:focus {
   @apply border-primary/30 outline-none;
-  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 2px rgba(var(--primary), 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.05);
   transform: translateY(-1px);
 }
 
@@ -186,8 +186,8 @@
   position: absolute;
   inset: 0;
   background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgba(255, 102, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 102, 0, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(var(--primary), 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--primary), 0.03) 1px, transparent 1px);
   pointer-events: none;
   z-index: 0;
 }
@@ -296,17 +296,18 @@
 .floating-label textarea {
   height: 56px;
   padding: 20px 16px 0;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
   transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .floating-label input:focus,
 .floating-label textarea:focus {
-  border-color: rgba(255, 102, 0, 0.3);
-  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.1);
-  transform: translateY(-1px);
+  border-color: rgba(var(--primary), 0.5);
+  box-shadow: 0 0 0 4px rgba(var(--primary), 0.1);
+  transform: translateY(-2px);
 }
 
 .floating-label label {
@@ -317,7 +318,7 @@
   padding: 18px 16px 0;
   pointer-events: none;
   transform-origin: 0 0;
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .floating-label input:focus ~ label,
@@ -325,7 +326,8 @@
 .floating-label textarea:focus ~ label,
 .floating-label textarea:not(:placeholder-shown) ~ label {
   transform: translateY(-10px) scale(0.75);
-  opacity: 0.7;
+  color: hsl(var(--primary));
+  opacity: 0.9;
 }
 
 /* Hide scrollbar */
@@ -340,7 +342,7 @@
 
 /* 3D effects */
 .card-3d {
-  @apply relative overflow-hidden rounded-xl;
+  @apply relative overflow-hidden rounded-3xl;
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -352,15 +354,15 @@
 }
 
 .btn-3d {
-  @apply relative overflow-hidden;
+  @apply relative overflow-hidden rounded-full;
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-3d:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 25px -3px rgba(var(--primary), 0.2), 0 8px 10px -4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-3d:active {
@@ -375,4 +377,143 @@
 
 .parallax-element {
   transition: transform 0.1s ease-out;
+}
+
+/* New 3D Shadow Effects */
+.shadow-3d {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px
+    rgba(255, 255, 255, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.shadow-3d-hover:hover {
+  box-shadow:
+    0 20px 25px -5px rgba(var(--primary), 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 15px rgba(var(--primary), 0.5);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 15px rgba(var(--secondary), 0.5);
+}
+
+.glow-accent {
+  box-shadow: 0 0 15px rgba(var(--accent), 0.5);
+}
+
+/* Input focus animations */
+.input-focus-animation {
+  position: relative;
+  overflow: hidden;
+}
+
+.input-focus-animation::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+  transition: width 0.3s ease;
+}
+
+.input-focus-animation:focus-within::after {
+  width: 100%;
+}
+
+/* New animated background */
+.animated-bg {
+  background: linear-gradient(
+    -45deg,
+    rgba(var(--primary), 0.1),
+    rgba(var(--secondary), 0.1),
+    rgba(var(--accent), 0.1),
+    rgba(var(--primary), 0.1)
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating elements */
+.floating-element {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.floating-element-delay-1 {
+  animation-delay: 1s;
+}
+
+.floating-element-delay-2 {
+  animation-delay: 2s;
+}
+
+.floating-element-delay-3 {
+  animation-delay: 3s;
+}
+
+/* Pulsing glow */
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Spinning elements */
+.spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Bounce subtle */
+.bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Slide in animations */
+.slide-in-bottom {
+  animation: slide-in-bottom 0.5s ease-out forwards;
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.5s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+/* Delay utilities */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
 }

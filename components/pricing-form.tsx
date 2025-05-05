@@ -33,19 +33,32 @@ export default function PricingForm({ packageName, price, onClose }: PricingForm
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission with a delay
-    setTimeout(() => {
-      console.log({
-        ...formData,
-        packageName,
-        price,
+    try {
+      // Create FormData object from the form
+      const formElement = e.currentTarget
+      const formDataObj = new FormData(formElement)
+
+      // Add package details
+      formDataObj.append("packageName", packageName)
+      formDataObj.append("price", price)
+
+      // Send the form data to Netlify
+      const response = await fetch("/__forms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataObj as any).toString(),
       })
 
-      setIsSubmitting(false)
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+      }
+
       setIsSubmitted(true)
 
       toast({
@@ -64,13 +77,25 @@ export default function PricingForm({ packageName, price, onClose }: PricingForm
         setIsSubmitted(false)
         onClose()
       }, 2000)
-    }, 1500)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      })
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <div className="p-4">
       {!isSubmitted ? (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" name="pricing">
+          <input type="hidden" name="form-name" value="pricing" />
+          <input type="hidden" name="packageName" value={packageName} />
+          <input type="hidden" name="price" value={price} />
+
           <div className="space-y-2 text-center mb-6">
             <h3 className="text-2xl font-bold">{packageName} Package</h3>
             <p className="text-muted-foreground">
