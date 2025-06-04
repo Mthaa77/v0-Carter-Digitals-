@@ -29,13 +29,25 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Carter Digitals | Premium Web Experiences That Convert",
+  title: "Carter Digitals | Professional Website Design & Development South Africa",
   description:
-    "South African creative agency crafting beautiful, functional, and conversion-focused digital experiences for global entrepreneurs and businesses.",
+    "South African creative agency crafting beautiful, responsive, and SEO-optimized websites for businesses. Affordable web design services in Johannesburg, Cape Town, and Durban.",
+  keywords: [
+    "website design South Africa",
+    "web development company Johannesburg",
+    "affordable website design Cape Town",
+    "e-commerce website development South Africa",
+    "WordPress website design services",
+    "responsive web design South Africa",
+    "SEO website development",
+    "custom website development Durban",
+    "business website design South Africa",
+    "professional web developer near me",
+  ],
   openGraph: {
-    title: "Carter Digitals | Premium Web Experiences That Convert",
+    title: "Carter Digitals | Professional Website Design & Development South Africa",
     description:
-      "South African creative agency crafting beautiful, functional, and conversion-focused digital experiences for global entrepreneurs and businesses.",
+      "South African creative agency crafting beautiful, responsive, and SEO-optimized websites for businesses. Affordable web design services in Johannesburg, Cape Town, and Durban.",
     url: "https://carterdigitals.com",
     siteName: "Carter Digitals",
     images: [
@@ -43,11 +55,28 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Carter Digitals",
+        alt: "Carter Digitals - Professional Website Design & Development South Africa",
       },
     ],
-    locale: "en_US",
+    locale: "en_ZA",
     type: "website",
+  },
+  alternates: {
+    canonical: "https://carterdigitals.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "verification_token",
   },
     generator: 'v0.dev'
 }
@@ -59,6 +88,43 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Structured data for local business */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebDesignCompany",
+              name: "Carter Digitals",
+              url: "https://carterdigitals.com",
+              logo: "https://carterdigitals.com/logo.png",
+              description:
+                "South African creative agency crafting beautiful, responsive, and SEO-optimized websites for businesses.",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "South Africa",
+              },
+              telephone: "+27724026893",
+              email: "kadiakakabelo4@gmail.com",
+              priceRange: "R1,899 - R20,000+",
+              sameAs: [
+                "https://facebook.com/carterdigitals",
+                "https://instagram.com/carterdigitals",
+                "https://twitter.com/carterdigitals",
+                "https://linkedin.com/company/carterdigitals",
+              ],
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "18:00",
+              },
+              areaServed: ["Johannesburg", "Cape Town", "Durban", "Pretoria", "South Africa"],
+            }),
+          }}
+        />
+      </head>
       <body className={cn("min-h-screen font-sans antialiased", poppins.variable, playfair.variable)}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}

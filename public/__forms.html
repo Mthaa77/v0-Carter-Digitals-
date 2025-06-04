@@ -5,17 +5,21 @@
   </head>
   <body>
     <!-- Contact form -->
-    <form name="contact" data-netlify="true" hidden>
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
       <input type="hidden" name="form-name" value="contact" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="projectType" />
       <input type="text" name="budget" />
       <textarea name="message"></textarea>
+      <div data-netlify-recaptcha="true"></div>
+      <div class="honeypot-field" style="display:none">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </div>
     </form>
     
     <!-- Pricing form -->
-    <form name="pricing" data-netlify="true" hidden>
+    <form name="pricing" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
       <input type="hidden" name="form-name" value="pricing" />
       <input type="text" name="name" />
       <input type="email" name="email" />
@@ -23,6 +27,10 @@
       <input type="text" name="packageName" />
       <input type="text" name="price" />
       <textarea name="message"></textarea>
+      <div data-netlify-recaptcha="true"></div>
+      <div class="honeypot-field" style="display:none">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </div>
     </form>
   </body>
 </html>

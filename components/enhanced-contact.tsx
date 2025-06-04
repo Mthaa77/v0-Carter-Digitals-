@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import {
   Phone,
   Mail,
@@ -13,11 +13,10 @@ import {
   CheckCircle2,
   MapPin,
   Clock,
-  Globe,
-  ArrowRight,
   MessageSquare,
-  Sparkles,
+  ArrowRight,
   AlertCircle,
+  Bell,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -29,6 +28,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 
 const contactMethods = [
   {
@@ -66,14 +66,15 @@ const contactMethods = [
 ]
 
 const projectTypes = [
-  { value: "website", label: "Website Design", icon: <Globe className="h-4 w-4" /> },
-  { value: "ecommerce", label: "E-commerce Store", icon: <Globe className="h-4 w-4" /> },
-  { value: "branding", label: "Logo & Branding", icon: <Sparkles className="h-4 w-4" /> },
-  { value: "flyer", label: "Flyer & Digital Media", icon: <Sparkles className="h-4 w-4" /> },
-  { value: "presentation", label: "Presentation", icon: <Sparkles className="h-4 w-4" /> },
-  { value: "cv", label: "CV/Resume Design", icon: <Sparkles className="h-4 w-4" /> },
-  { value: "copywriting", label: "Copywriting", icon: <Sparkles className="h-4 w-4" /> },
-  { value: "other", label: "Other Services", icon: <Sparkles className="h-4 w-4" /> },
+  { value: "website", label: "Website Design" },
+  { value: "ecommerce", label: "E-commerce Store" },
+  { value: "branding", label: "Logo & Branding" },
+  { value: "flyer", label: "Flyer & Digital Media" },
+  { value: "presentation", label: "Presentation" },
+  { value: "cv", label: "CV/Resume Design" },
+  { value: "copywriting", label: "Copywriting" },
+  { value: "virtual-assistants", label: "Virtual Assistants" },
+  { value: "other", label: "Other Services" },
 ]
 
 const budgetRanges = [
@@ -86,6 +87,7 @@ const budgetRanges = [
 interface FormState {
   name: string
   email: string
+  phone: string
   projectType: string
   budget: string
   message: string
@@ -93,9 +95,11 @@ interface FormState {
 
 export default function EnhancedContact() {
   const { toast } = useToast()
+  const router = useRouter()
   const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
+    phone: "",
     projectType: "",
     budget: "",
     message: "",
@@ -195,6 +199,7 @@ export default function EnhancedContact() {
         setFormData({
           name: "",
           email: "",
+          phone: "",
           projectType: "",
           budget: "",
           message: "",
@@ -211,6 +216,10 @@ export default function EnhancedContact() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleFullContactPage = () => {
+    router.push("/contact")
   }
 
   // Animation variants
@@ -234,7 +243,7 @@ export default function EnhancedContact() {
   }
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 md:py-32 relative overflow-hidden animated-bg">
+    <section id="contact" ref={sectionRef} className="py-16 md:py-24 lg:py-32 relative overflow-hidden animated-bg">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-[100px] floating-element"></div>
@@ -252,15 +261,15 @@ export default function EnhancedContact() {
           <Badge className="px-4 py-1.5 rounded-full text-sm font-medium mb-4 inline-block bg-primary/10 text-primary border border-primary/20 shadow-3d">
             GET IN TOUCH
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 tracking-tight">
             Let's Create Something <span className="text-gradient-primary">Amazing Together</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Ready to transform your digital presence? We're just a message away from turning your vision into reality.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Contact methods column */}
           <motion.div
             initial="hidden"
@@ -327,8 +336,26 @@ export default function EnhancedContact() {
                       <p className="text-sm text-muted-foreground">Remote services worldwide</p>
                     </div>
                   </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                      <Bell className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium">Response Time</h4>
+                      <p className="text-sm text-muted-foreground">We respond to all inquiries within 24 hours</p>
+                      <p className="text-sm text-muted-foreground">Email notifications for all form submissions</p>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
+
+              <Button
+                onClick={handleFullContactPage}
+                className="w-full btn-3d bg-gradient-to-r from-primary/80 to-primary/60 text-white hover:from-primary hover:to-primary/80"
+              >
+                Visit Full Contact Page <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
             </motion.div>
           </motion.div>
 
@@ -340,7 +367,7 @@ export default function EnhancedContact() {
             className="lg:col-span-3"
           >
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid grid-cols-2 mb-6 bg-background/50 backdrop-blur-md border border-white/20 rounded-full p-1 w-full max-w-md mx-auto">
+              <TabsList className="grid grid-cols-2 mb-4 md:mb-6 bg-background/50 backdrop-blur-md border border-white/20 rounded-full p-1 w-full max-w-md mx-auto">
                 <TabsTrigger
                   value="form"
                   className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-white"
@@ -357,209 +384,229 @@ export default function EnhancedContact() {
 
               <TabsContent value="form" className="focus-visible:outline-none focus-visible:ring-0">
                 <Card className="card-3d border-2 border-white/20 bg-white/5 backdrop-blur-md shadow-3d overflow-hidden">
-                  <CardContent className="p-6 md:p-8">
-                    <AnimatePresence mode="wait">
-                      {isSubmitted ? (
-                        <motion.div
-                          key="success"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.9 }}
-                          className="flex flex-col items-center justify-center py-10 text-center"
+                  <CardContent className="p-4 sm:p-6 md:p-8">
+                    {isSubmitted ? (
+                      <motion.div
+                        key="success"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="flex flex-col items-center justify-center py-10 text-center"
+                      >
+                        <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 pulse-glow">
+                          <CheckCircle2 className="h-10 w-10 text-primary" />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+                        <p className="text-muted-foreground mb-6 max-w-md">
+                          Thank you for reaching out. We've received your message and will get back to you as soon as
+                          possible. You'll receive an email confirmation shortly.
+                        </p>
+                        <Button
+                          onClick={() => setIsSubmitted(false)}
+                          className="btn-3d bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary"
                         >
-                          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 pulse-glow">
-                            <CheckCircle2 className="h-10 w-10 text-primary" />
-                          </div>
-                          <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                          <p className="text-muted-foreground mb-6 max-w-md">
-                            Thank you for reaching out. We've received your message and will get back to you as soon as
-                            possible.
-                          </p>
-                          <Button
-                            onClick={() => setIsSubmitted(false)}
-                            className="btn-3d bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary"
-                          >
-                            Send Another Message
-                          </Button>
-                        </motion.div>
-                      ) : (
-                        <motion.form
-                          key="form"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          name="contact"
-                          ref={formRef}
-                          onSubmit={handleSubmit}
-                          className="space-y-6"
-                        >
-                          {/* Hidden input required for Netlify forms */}
-                          <input type="hidden" name="form-name" value="contact" />
+                          Send Another Message
+                        </Button>
+                      </motion.div>
+                    ) : (
+                      <motion.form
+                        key="form"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        name="contact"
+                        ref={formRef}
+                        onSubmit={handleSubmit}
+                        className="space-y-6"
+                      >
+                        {/* Hidden input required for Netlify forms */}
+                        <input type="hidden" name="form-name" value="contact" />
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                              <div className="floating-label input-focus-animation">
-                                <Input
-                                  id="name"
-                                  name="name"
-                                  placeholder=" "
-                                  value={formData.name}
-                                  onChange={handleChange}
-                                  className={cn(
-                                    "premium-input h-14 rounded-2xl",
-                                    formErrors.name ? "border-red-500 border-2" : "",
-                                  )}
-                                />
-                                <Label
-                                  htmlFor="name"
-                                  className={cn(
-                                    formErrors.name ? "text-red-500" : "",
-                                    formData.name ? "text-primary" : "",
-                                  )}
-                                >
-                                  Your Name
-                                </Label>
-                              </div>
-                              {formErrors.name && (
-                                <p className="text-red-500 text-xs flex items-center gap-1 ml-1 mt-1">
-                                  <AlertCircle className="h-3 w-3" /> {formErrors.name}
-                                </p>
-                              )}
-                            </div>
-
-                            <div className="space-y-2">
-                              <div className="floating-label input-focus-animation">
-                                <Input
-                                  id="email"
-                                  name="email"
-                                  type="email"
-                                  placeholder=" "
-                                  value={formData.email}
-                                  onChange={handleChange}
-                                  className={cn(
-                                    "premium-input h-14 rounded-2xl",
-                                    formErrors.email ? "border-red-500 border-2" : "",
-                                  )}
-                                />
-                                <Label
-                                  htmlFor="email"
-                                  className={cn(
-                                    formErrors.email ? "text-red-500" : "",
-                                    formData.email ? "text-primary" : "",
-                                  )}
-                                >
-                                  Your Email
-                                </Label>
-                              </div>
-                              {formErrors.email && (
-                                <p className="text-red-500 text-xs flex items-center gap-1 ml-1 mt-1">
-                                  <AlertCircle className="h-3 w-3" /> {formErrors.email}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="space-y-3">
-                            <Label className="text-sm font-medium">Project Type</Label>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                              {projectTypes.map((type) => (
-                                <Button
-                                  key={type.value}
-                                  type="button"
-                                  variant={formData.projectType === type.value ? "default" : "outline"}
-                                  onClick={() => handleSelectChange("projectType", type.value)}
-                                  className={cn(
-                                    "h-auto py-3 justify-start gap-2 rounded-xl btn-3d",
-                                    formData.projectType === type.value
-                                      ? "bg-primary text-white"
-                                      : "border-white/20 bg-white/5",
-                                  )}
-                                  name="projectType"
-                                  value={type.value}
-                                >
-                                  {type.icon}
-                                  <span className="text-sm">{type.label}</span>
-                                </Button>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="space-y-3">
-                            <Label>Budget Range</Label>
-                            <RadioGroup
-                              onValueChange={(value) => handleSelectChange("budget", value)}
-                              value={formData.budget}
-                              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-                              name="budget"
-                            >
-                              {budgetRanges.map((range) => (
-                                <div
-                                  key={range.value}
-                                  className={cn(
-                                    "flex items-center space-x-2 card-3d p-3 border-2",
-                                    formData.budget === range.value ? range.color : "border-white/10 bg-white/5",
-                                    "micro-bounce cursor-pointer",
-                                  )}
-                                  onClick={() => handleSelectChange("budget", range.value)}
-                                >
-                                  <RadioGroupItem value={range.value} id={range.value} />
-                                  <Label htmlFor={range.value} className="cursor-pointer">
-                                    {range.label}
-                                  </Label>
-                                </div>
-                              ))}
-                            </RadioGroup>
-                          </div>
-
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-2">
                             <div className="floating-label input-focus-animation">
-                              <Textarea
-                                id="message"
-                                name="message"
+                              <Input
+                                id="name"
+                                name="name"
                                 placeholder=" "
-                                rows={4}
-                                value={formData.message}
+                                value={formData.name}
                                 onChange={handleChange}
                                 className={cn(
-                                  "premium-input pt-6 min-h-[120px] rounded-2xl",
-                                  formErrors.message ? "border-red-500 border-2" : "",
+                                  "premium-input h-14 rounded-2xl",
+                                  formErrors.name ? "border-red-500 border-2" : "",
                                 )}
                               />
                               <Label
-                                htmlFor="message"
+                                htmlFor="name"
                                 className={cn(
-                                  formErrors.message ? "text-red-500" : "",
-                                  formData.message ? "text-primary" : "",
+                                  formErrors.name ? "text-red-500" : "",
+                                  formData.name ? "text-primary" : "",
                                 )}
                               >
-                                Tell us about your project
+                                Your Name
                               </Label>
                             </div>
-                            {formErrors.message && (
+                            {formErrors.name && (
                               <p className="text-red-500 text-xs flex items-center gap-1 ml-1 mt-1">
-                                <AlertCircle className="h-3 w-3" /> {formErrors.message}
+                                <AlertCircle className="h-3 w-3" /> {formErrors.name}
                               </p>
                             )}
                           </div>
 
-                          <Button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full h-14 btn-3d bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary rounded-2xl"
-                          >
-                            {isSubmitting ? (
-                              <>
-                                <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending Message...
-                              </>
-                            ) : (
-                              <>
-                                <Send className="mr-2 h-5 w-5" /> Send Message
-                              </>
+                          <div className="space-y-2">
+                            <div className="floating-label input-focus-animation">
+                              <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder=" "
+                                value={formData.email}
+                                onChange={handleChange}
+                                className={cn(
+                                  "premium-input h-14 rounded-2xl",
+                                  formErrors.email ? "border-red-500 border-2" : "",
+                                )}
+                              />
+                              <Label
+                                htmlFor="email"
+                                className={cn(
+                                  formErrors.email ? "text-red-500" : "",
+                                  formData.email ? "text-primary" : "",
+                                )}
+                              >
+                                Your Email
+                              </Label>
+                            </div>
+                            {formErrors.email && (
+                              <p className="text-red-500 text-xs flex items-center gap-1 ml-1 mt-1">
+                                <AlertCircle className="h-3 w-3" /> {formErrors.email}
+                              </p>
                             )}
-                          </Button>
-                        </motion.form>
-                      )}
-                    </AnimatePresence>
+                          </div>
+                        </div>
+
+                        {/* Phone Number Field */}
+                        <div className="space-y-2">
+                          <div className="floating-label input-focus-animation">
+                            <Input
+                              id="phone"
+                              name="phone"
+                              type="tel"
+                              placeholder=" "
+                              value={formData.phone}
+                              onChange={handleChange}
+                              className="premium-input h-14 rounded-2xl"
+                            />
+                            <Label htmlFor="phone" className={formData.phone ? "text-primary" : ""}>
+                              Phone Number (Optional)
+                            </Label>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <Label className="text-sm font-medium">Project Type</Label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
+                            {projectTypes.slice(0, 6).map((type) => (
+                              <Button
+                                key={type.value}
+                                type="button"
+                                variant={formData.projectType === type.value ? "default" : "outline"}
+                                onClick={() => handleSelectChange("projectType", type.value)}
+                                className={cn(
+                                  "h-auto py-3 justify-start text-xs md:text-sm rounded-xl btn-3d",
+                                  formData.projectType === type.value
+                                    ? "bg-primary text-white"
+                                    : "border-white/20 bg-white/5",
+                                )}
+                                name="projectType"
+                                value={type.value}
+                              >
+                                <span>{type.label}</span>
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <Label>Budget Range</Label>
+                          <RadioGroup
+                            onValueChange={(value) => handleSelectChange("budget", value)}
+                            value={formData.budget}
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                            name="budget"
+                          >
+                            {budgetRanges.map((range) => (
+                              <div
+                                key={range.value}
+                                className={cn(
+                                  "flex items-center space-x-2 card-3d p-3 border-2",
+                                  formData.budget === range.value ? range.color : "border-white/10 bg-white/5",
+                                  "micro-bounce cursor-pointer",
+                                )}
+                                onClick={() => handleSelectChange("budget", range.value)}
+                              >
+                                <RadioGroupItem value={range.value} id={range.value} />
+                                <Label htmlFor={range.value} className="cursor-pointer">
+                                  {range.label}
+                                </Label>
+                              </div>
+                            ))}
+                          </RadioGroup>
+                        </div>
+
+                        <div className="space-y-2">
+                          <div className="floating-label input-focus-animation">
+                            <Textarea
+                              id="message"
+                              name="message"
+                              placeholder=" "
+                              rows={4}
+                              value={formData.message}
+                              onChange={handleChange}
+                              className={cn(
+                                "premium-input pt-6 min-h-[120px] rounded-2xl",
+                                formErrors.message ? "border-red-500 border-2" : "",
+                              )}
+                            />
+                            <Label
+                              htmlFor="message"
+                              className={cn(
+                                formErrors.message ? "text-red-500" : "",
+                                formData.message ? "text-primary" : "",
+                              )}
+                            >
+                              Tell us about your project
+                            </Label>
+                          </div>
+                          {formErrors.message && (
+                            <p className="text-red-500 text-xs flex items-center gap-1 ml-1 mt-1">
+                              <AlertCircle className="h-3 w-3" /> {formErrors.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="text-sm text-muted-foreground flex items-start gap-2 p-3 bg-primary/5 rounded-xl border border-primary/10">
+                          <Bell className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                          <p>You'll receive an email confirmation when your message is submitted.</p>
+                        </div>
+
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full h-14 btn-3d bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary rounded-2xl"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending Message...
+                            </>
+                          ) : (
+                            <>
+                              <Send className="mr-2 h-5 w-5" /> Send Message
+                            </>
+                          )}
+                        </Button>
+                      </motion.form>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
